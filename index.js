@@ -30,14 +30,10 @@ app = new Vue({
 	},
 	computed: {
 		indice: function () {
-			total = this.trimestres.reduce(function(prev, act){
-				return prev + act.materias.reduce(function(prev, act){ return prev+act.nota*act.creditos }, 0);
-			}, 0);
-			creditos = this.trimestres.reduce(function(prev, act){
-				return prev + act.materias.reduce(function(prev, act){ return prev+act.creditos }, 0);
-			}, 0);
+			total = this.trimestres.reduce((prev, act) => prev + act.materias.reduce((prev, act) => prev + act.nota*act.creditos, 0), 0);
+			creditos = this.trimestres.reduce((prev, act) => prev + act.materias.reduce((prev, act) => prev+act.creditos, 0), 0);
 
-			return total/creditos;
+			return creditos === 0 ? 0 : total/creditos;
 		}
 	}
 });
