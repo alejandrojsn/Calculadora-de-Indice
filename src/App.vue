@@ -13,12 +13,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="materia in term.courses">
-            <td>{{ materia.name }}</td>
-            <td>{{ materia.credits }}</td>
-            <td>{{ materia.grade }}</td>
-            <td><button v-on:click="remove(term.courses, materia)">Quitar</button></td>
-          </tr>
+          <course v-for="course in term.courses" v-bind:course="course" v-on:delete-course="remove(term.courses, course)"></course>
           <tr>
             <td>
               <input type="text" v-model="term.newCourse.name">
@@ -44,9 +39,11 @@
 </template>
 
 <script>
+import course from './components/Course.vue';
+
 export default {
   name: 'app',
-  components: {},
+  components: { course },
   data() {
     return {
       terms: [
