@@ -1,36 +1,7 @@
 <template>
   <div id="app">
     Indice: {{ indice }}
-    <ul v-for="term in terms">
-      <li><b>{{ term.name }} <button @click="remove(terms, term)">Quitar</button></b></li>
-      <table>
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Créditos</th>
-            <th>Nota,</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <course v-for="course in term.courses" v-bind:course="course" v-on:delete-course="remove(term.courses, course)"></course>
-          <tr>
-            <td>
-              <input type="text" v-model="term.newCourse.name">
-            </td>
-            <td>
-              <input type="number" v-model.number="term.newCourse.credits">
-            </td>
-            <td>
-              <input type="number" v-model.number="term.newCourse.grade">
-            </td>
-            <td>
-              <button @click="addCourse(term)">Añadir</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </ul>
+    <term v-for="term in terms" v-bind:term="term" @delete-course="removeCourse" @delete-term="remove(terms, term)" @add-course="addCourse(term)"></term>
     <div>
       <input type="text" v-model="newTermInput">
       <button @click="add(terms, termFactory(newTermInput)); newTermInput = ''">Añadir</button>
@@ -39,11 +10,13 @@
 </template>
 
 <script>
-import course from './components/Course.vue';
+import term from '@/components/Term.vue';
 
 export default {
+
   name: 'app',
-  components: { course },
+  components: { term },
+
   data() {
     return {
       terms: [
@@ -59,20 +32,26 @@ export default {
       newTermInput: ""
     }
   },
+
   methods: {
-    remove: function (removeFrom, element) {
+
+    remove(removeFrom, element) {
       removeFrom.splice(removeFrom.indexOf(element), 1);
     },
-    add: function (addTo, element) {
-      addTo.push(element);
+
+    addCourse(term) {
+      term.courses.push(Object.assign({}, term.newCourse));
     },
-    addCourse: function (term) {
-      this.add(term.courses, Object.assign({}, term.newCourse));
-    },
-    termFactory: function (name) {
+
+    termFactory(name) {
       return { name, courses: [], newCourse: { name: "", credits: 0, grade: 0 } }
+    },
+
+    removeCourse(term, course) {
+      this.remove(term, course);
     }
   },
+
   computed: {
     indice: function () {
       let total = this.terms.reduce((prev, act) => prev + act.courses.reduce((prev, act) => prev + act.grade*act.credits, 0), 0);
@@ -80,8 +59,10 @@ export default {
 
       return credits === 0 ? 0 : total/credits;
     }
+
   }
-}
+
+};
 </script>
 
 <style>
