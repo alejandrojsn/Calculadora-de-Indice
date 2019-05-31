@@ -1,10 +1,12 @@
 <template>
   <div id="app">
     Indice: {{ indice }}
-    <term v-for="term in terms" v-bind:term="term" @delete-course="removeCourse" @delete-term="remove(terms, term)" @add-course="addCourse(term)"></term>
+    <div class="terms">
+      <term v-for="term in terms" v-bind:term="term" @delete-course="removeCourse" @delete-term="remove(terms, term)" @add-course="addCourse(term)"></term>
+    </div>
     <div>
       <input type="text" v-model="newTermInput">
-      <button @click="add(terms, termFactory(newTermInput)); newTermInput = ''">Añadir</button>
+      <button @click="terms.push(termFactory(newTermInput)); newTermInput = ''">Añadir</button>
     </div>
   </div>
 </template>
@@ -25,6 +27,46 @@ export default {
           courses: [
             { name: 'Mate I', credits: 4, grade: 5 },
             { name: 'Lenguaje I', credits: 3, grade: 5}
+          ],
+          newCourse: { name: "", credits: 0, grade: 0}
+        },
+        {
+          name: 'term 2',
+          courses: [
+            { name: 'Mate II', credits: 4, grade: 5 },
+            { name: 'Lenguaje II', credits: 3, grade: 4}
+          ],
+          newCourse: { name: "", credits: 0, grade: 0}
+        },
+        {
+          name: 'term 2',
+          courses: [
+            { name: 'Mate II', credits: 4, grade: 5 },
+            { name: 'Lenguaje II', credits: 3, grade: 4}
+          ],
+          newCourse: { name: "", credits: 0, grade: 0}
+        },
+        {
+          name: 'term 2',
+          courses: [
+            { name: 'Mate II', credits: 4, grade: 5 },
+            { name: 'Lenguaje II', credits: 3, grade: 4}
+          ],
+          newCourse: { name: "", credits: 0, grade: 0}
+        },
+        {
+          name: 'term 2',
+          courses: [
+            { name: 'Mate II', credits: 4, grade: 5 },
+            { name: 'Lenguaje II', credits: 3, grade: 4}
+          ],
+          newCourse: { name: "", credits: 0, grade: 0}
+        },
+        {
+          name: 'term 2',
+          courses: [
+            { name: 'Mate II', credits: 4, grade: 5 },
+            { name: 'Lenguaje II', credits: 3, grade: 4}
           ],
           newCourse: { name: "", credits: 0, grade: 0}
         }
@@ -65,6 +107,16 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
+.terms
+{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: 45vh;
+  height: auto;
+  width:100vw;
+  border-top:1px solid black;
+}
 
 </style>
