@@ -1,44 +1,44 @@
 <template>
   <div id="app">
     Indice: {{ indice }}
-    <ul v-for="trimestre in trimestres">
-      <li><b>{{ trimestre.nombre }} <button @click="quitar(trimestres, trimestre)">Quitar</button></b></li>
+    <ul v-for="term in terms">
+      <li><b>{{ term.name }} <button @click="remove(terms, term)">Quitar</button></b></li>
       <table>
         <thead>
           <tr>
             <th>Nombre</th>
             <th>Créditos</th>
-            <th>Nota</th>
+            <th>Nota,</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="materia in trimestre.materias">
-            <td>{{ materia.nombre }}</td>
-            <td>{{ materia.creditos }}</td>
-            <td>{{ materia.nota }}</td>
-            <td><button v-on:click="quitar(trimestre.materias, materia)">Quitar</button></td>
+          <tr v-for="materia in term.courses">
+            <td>{{ materia.name }}</td>
+            <td>{{ materia.credits }}</td>
+            <td>{{ materia.grade }}</td>
+            <td><button v-on:click="remove(term.courses, materia)">Quitar</button></td>
           </tr>
           <tr>
             <td>
-              <input type="text" v-model="trimestre.nuevaMateria.nombre">
+              <input type="text" v-model="term.newCourse.name">
             </td>
             <td>
-              <input type="number" v-model.number="trimestre.nuevaMateria.creditos">
+              <input type="number" v-model.number="term.newCourse.credits">
             </td>
             <td>
-              <input type="number" v-model.number="trimestre.nuevaMateria.nota">
+              <input type="number" v-model.number="term.newCourse.grade">
             </td>
             <td>
-              <button @click="añadirMateria(trimestre)">Añadir</button>
+              <button @click="addCourse(term)">Añadir</button>
             </td>
           </tr>
         </tbody>
       </table>
     </ul>
     <div>
-      <input type="text" v-model="nuevoTrimestre">
-      <button @click="añadir(trimestres, trimestreFactory(nuevoTrimestre)); nuevoTrimestre = ''">Añadir</button>
+      <input type="text" v-model="newTermInput">
+      <button @click="add(terms, termFactory(newTermInput)); newTermInput = ''">Añadir</button>
     </div>
   </div>
 </template>
@@ -49,40 +49,39 @@ export default {
   components: {},
   data() {
     return {
-      message: 'Hola',
-      trimestres: [
+      terms: [
         {
-          nombre: 'Trimestre 1',
-          materias: [
-            { nombre: 'Mate I', creditos: 4, nota: 5 },
-            { nombre: 'Lenguaje I', creditos: 3, nota: 5}
+          name: 'term 1',
+          courses: [
+            { name: 'Mate I', credits: 4, grade: 5 },
+            { name: 'Lenguaje I', credits: 3, grade: 5}
           ],
-          nuevaMateria: { nombre: "", creditos: 0, nota: 0}
+          newCourse: { name: "", credits: 0, grade: 0}
         }
       ],
-      nuevoTrimestre: ""
+      newTermInput: ""
     }
   },
   methods: {
-    quitar: function (quitarDe, elementoAQuitar) {
-      quitarDe.splice(quitarDe.indexOf(elementoAQuitar), 1);
+    remove: function (removeFrom, element) {
+      removeFrom.splice(removeFrom.indexOf(element), 1);
     },
-    añadir: function (añadirA, nuevoElemento) {
-      añadirA.push(nuevoElemento);
+    add: function (addTo, element) {
+      addTo.push(element);
     },
-    añadirMateria: function (trimestre) {
-      this.añadir(trimestre.materias, Object.assign({}, trimestre.nuevaMateria));
+    addCourse: function (term) {
+      this.add(term.courses, Object.assign({}, term.newCourse));
     },
-    trimestreFactory: function (nombre) {
-      return { nombre, materias: [], nuevaMateria: { nombre: "", creditos: 0, nota: 0 } }
+    termFactory: function (name) {
+      return { name, courses: [], newCourse: { name: "", credits: 0, grade: 0 } }
     }
   },
   computed: {
     indice: function () {
-      let total = this.trimestres.reduce((prev, act) => prev + act.materias.reduce((prev, act) => prev + act.nota*act.creditos, 0), 0);
-      let creditos = this.trimestres.reduce((prev, act) => prev + act.materias.reduce((prev, act) => prev+act.creditos, 0), 0);
+      let total = this.terms.reduce((prev, act) => prev + act.courses.reduce((prev, act) => prev + act.grade*act.credits, 0), 0);
+      let credits = this.terms.reduce((prev, act) => prev + act.courses.reduce((prev, act) => prev+act.credits, 0), 0);
 
-      return creditos === 0 ? 0 : total/creditos;
+      return credits === 0 ? 0 : total/credits;
     }
   }
 }
