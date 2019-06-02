@@ -1,8 +1,8 @@
 <template>  
   <div class="course">
-    <div class="name"><p>{{ course.name }}</p></div>
-    <div class="credits">{{ course.credits }}</div>
-    <div class="grade">{{ course.grade }}</div>
+    <text-edit class="name" v-bind:object="course" v-bind:property="'name'"></text-edit>
+    <number-edit class="credits" v-bind:object="course" v-bind:property="'credits'"></number-edit>
+    <number-edit class="grade" v-bind:object="course" v-bind:property="'grade'"></number-edit>
     <div class="remove">
       <button @click="$emit('delete-course')">Quitar</button>
     </div>
@@ -10,9 +10,13 @@
 </template>
 
 <script>
+import TextEdit from "@/components/text-edit.vue";
+import NumberEdit from "@/components/number-edit.vue";
+
 export default {
   name: 'course',
-  props: [ 'course' ]
+  props: [ 'course' ],
+  components: { TextEdit, NumberEdit }
 }
 </script>
 
@@ -39,6 +43,12 @@ export default {
 {
   border-left:none;
 }
+
+/* /deep/ input
+{
+  width:100%;
+  height:100%;
+}*/
 
 .name
 {
