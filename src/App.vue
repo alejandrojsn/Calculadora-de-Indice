@@ -32,6 +32,9 @@ export default {
 
     addTerm() {
       this.terms.push({ name: `Trimestre ${this.terms.length+1}`, courses: [] });
+    },
+    save () {
+      localStorage.setItem('ajsn-cdi-terms', JSON.stringify(this.terms));
     }
   },
 
@@ -45,8 +48,14 @@ export default {
 
   },
 
-  created() {
-    this.addTerm();
+  mounted() {
+    if (localStorage.getItem('ajsn-cdi-terms')) {
+      this.terms = JSON.parse(localStorage.getItem('ajsn-cdi-terms'));
+    } else {
+      this.addTerm();
+    }
+
+    window.addEventListener('beforeunload', this.save);
   }
 
 };

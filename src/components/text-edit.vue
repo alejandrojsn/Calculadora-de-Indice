@@ -2,7 +2,7 @@
   <div>
     <label class="editable" @click="activate" :for="id">
       <span v-show="!active">{{ value }}</span>
-      <input :id="id" v-show="active" type="text" v-model="value" @keydown.enter="deactivate" @blur="deactivate" @keyup="$emit('input', value)">
+      <input :id="id" v-show="active" type="text" v-model="modifiedValue" @keydown.enter="deactivate" @blur="deactivate" @keyup="$emit('input', modifiedValue)">
     </label>
   </div>
 </template>
@@ -16,7 +16,8 @@ export default {
   data(){
     return {
       active: false,
-      id: uuidv4()
+      id: uuidv4(),
+      modifiedValue: this.value
     }
   },
   methods: {
