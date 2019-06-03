@@ -2,7 +2,7 @@
   <div>
     <label class="editable" @click="activate" v-bind:for="id">
       <span v-show="!active">{{ value }}</span>
-      <input v-bind:id="id" v-show="active" type="number" min="0" v-model.number="value" @keydown.enter="deactivate" @keyup.backspace="preventEmpty" @blur="deactivate" @keyup="$emit('input', value)" autofocus>
+      <input v-bind:id="id" v-show="active" type="number" min="0" v-model.number="value" @keydown.enter="deactivate" @keyup.backspace="preventEmpty" @blur="deactivate" @keyup="$emit('input', value)">
     </label>
   </div>
 </template>
@@ -37,27 +37,27 @@ export default {
 
 input
 {
-  width:100%;
-  height:100%;
   font-family: Arial, Helvetica, sans-serif;
   font-size:16px;
+  height:100%;
   text-align: center;
+  width:100%;
 }
 
 .editable
 {
+  align-items: center;
   cursor: text;
   display:flex;
-  justify-content: center;
-  align-items: center;
-  width:100%;
   height:100%;
+  justify-content: center;
+  width:100%;
 }
 
 div
 {
-  width:100%;
   height:100%;
+  width:100%;
 }
 
 </style>

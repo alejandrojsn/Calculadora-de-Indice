@@ -27,48 +27,42 @@ export default {
           courses: [
             { name: 'Mate I', credits: 4, grade: 5 },
             { name: 'Lenguaje I', credits: 3, grade: 5}
-          ],
-          newCourse: { name: "", credits: 0, grade: 0}
+          ]
         },
         {
           name: 'term 2',
           courses: [
             { name: 'Mate II', credits: 4, grade: 5 },
             { name: 'Lenguaje II', credits: 3, grade: 4}
-          ],
-          newCourse: { name: "", credits: 0, grade: 0}
+          ]
         },
         {
           name: 'term 2',
           courses: [
             { name: 'Mate II', credits: 4, grade: 5 },
             { name: 'Lenguaje II', credits: 3, grade: 4}
-          ],
-          newCourse: { name: "", credits: 0, grade: 0}
+          ]
         },
         {
           name: 'term 2',
           courses: [
             { name: 'Mate II', credits: 4, grade: 5 },
             { name: 'Lenguaje II', credits: 3, grade: 4}
-          ],
-          newCourse: { name: "", credits: 0, grade: 0}
+          ]
         },
         {
           name: 'term 2',
           courses: [
             { name: 'Mate II', credits: 4, grade: 5 },
             { name: 'Lenguaje II', credits: 3, grade: 4}
-          ],
-          newCourse: { name: "", credits: 0, grade: 0}
+          ]
         },
         {
           name: 'term 2',
           courses: [
             { name: 'Mate II', credits: 4, grade: 5 },
             { name: 'Lenguaje II', credits: 3, grade: 4}
-          ],
-          newCourse: { name: "", credits: 0, grade: 0}
+          ]
         }
       ],
       newTermInput: ""
@@ -82,11 +76,11 @@ export default {
     },
 
     addCourse(term) {
-      term.courses.push(Object.assign({}, term.newCourse));
+      term.courses.push({ name: `Asignatura ${term.courses.length+1}`, credits: 0, grade: 0 });
     },
 
     termFactory(name) {
-      return { name, courses: [], newCourse: { name: "", credits: 0, grade: 0 } }
+      return { name, courses: [] };
     },
 
     removeCourse(term, course) {

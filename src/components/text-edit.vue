@@ -34,27 +34,27 @@ export default {
 
 input
 {
-  width:100%;
-  height:100%;
   font-family: Arial, Helvetica, sans-serif;
   font-size:16px;
+  height:100%;
   text-align: center;
+  width:100%;
 }
 
 .editable
 {
+  align-items: center;
   cursor: text;
   display:flex;
-  justify-content: center;
-  align-items: center;
-  width:100%;
   height:100%;
+  justify-content: center;
+  width:100%;
 }
 
 div
 {
-  width:100%;
   height:100%;
+  width:100%;
 }
 
 </style>

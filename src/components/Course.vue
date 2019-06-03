@@ -3,9 +3,7 @@
     <text-edit class="name" v-model="course.name"></text-edit>
     <number-edit class="credits" v-model="course.credits"></number-edit>
     <number-edit class="grade" v-model="course.grade"></number-edit>
-    <div class="remove">
-      <button @click="$emit('delete-course')">Quitar</button>
-    </div>
+    <button class="remove" @click="$emit('delete-course')">X</button>
   </div>
 </template>
 
@@ -26,15 +24,13 @@ export default {
 {
   display: flex;
   width:100%;
-  height:33.33%;
+  height:34%;
   border-bottom: 1px solid black;
+  position: relative;
 }
 
 .course div
 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height:100%;
   border-left: 1px solid black;
 }
@@ -46,7 +42,7 @@ export default {
 
 .name
 {
-  width:50%;
+  width:60%;
 }
 
 .credits, .grade
@@ -56,6 +52,14 @@ export default {
 
 .remove
 {
-  width:10%;
+  cursor:pointer;
+  background:#e1e1e1;
+  border:none;
+  height:20px;
+  left:0;
+  position:absolute;
+  top: 0;
+  width:20px;
+  z-index:99;
 }
 </style>
