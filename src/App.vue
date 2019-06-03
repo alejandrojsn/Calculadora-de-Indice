@@ -83,7 +83,7 @@ export default {
   computed: {
     indice: function () {
       let total = this.terms.reduce((prev, act) => prev + act.courses.reduce((prev, act) => prev + act.grade*act.credits, 0), 0);
-      let credits = this.terms.reduce((prev, act) => prev + act.courses.reduce((prev, act) => prev+act.credits, 0), 0);
+      let credits = this.terms.reduce((prev, act) => prev + act.courses.reduce((prev, act) => act.grade === 0 ? prev : prev + act.credits, 0), 0);
 
       return credits === 0 ? 0 : total/credits;
     }
