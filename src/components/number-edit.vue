@@ -1,7 +1,9 @@
 <template>
   <div>
-    <label v-bind:for="id" v-show="!active" @click="active = !active">{{ object[property] }}</label>
-    <input v-bind:id="id" v-show="active" type="number" min="0" v-model.number="object[property]" @keydown.enter="unactive" @keyup.backspace="preventZero" @blur="unactive" autofocus>
+    <label class="editable" @click="activate" v-bind:for="id">
+      <span v-show="!active">{{ value }}</span>
+      <input v-bind:id="id" v-show="active" type="number" min="0" v-model.number="value" @keydown.enter="deactivate" @keyup.backspace="preventEmpty" @blur="deactivate" @keyup="$emit('input', value)" autofocus>
+    </label>
   </div>
 </template>
 
@@ -10,7 +12,7 @@ import {v4 as uuidv4} from 'uuid';
 
 export default {
   name: 'number-edit',
-  props: [ 'object', 'property', 'type' ],
+  props: [ 'value' ],
   data(){
     return {
       active: false,
@@ -18,10 +20,13 @@ export default {
     }
   },
   methods: {
-    preventZero(){
-      this.object[this.property] = this.object[this.property] === '' ? 0 : this.object[this.property];
+    preventEmpty(){
+      this.value = this.value === '' ? 0 : this.value;
     },
-    unactive(){
+    activate(){
+      this.active = true;
+    },
+    deactivate(){
       this.active = false;
     }
   }
@@ -39,9 +44,20 @@ input
   text-align: center;
 }
 
-label
+.editable
 {
   cursor: text;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  height:100%;
+}
+
+div
+{
+  width:100%;
+  height:100%;
 }
 
 </style>

@@ -1,7 +1,9 @@
 <template>
   <div>
-    <label class="hola" v-bind:for="id" v-show="!active" @click="active = true">{{ object[property] }}</label>
-    <input v-bind:id="id" v-show="active" type="text" v-model="object[property]" @keydown.enter="unactive" @blur="unactive">
+    <label class="editable" @click="activate" v-bind:for="id">
+      <span v-show="!active">{{ value }}</span>
+      <input v-bind:id="id" v-show="active" type="text" v-model="value" @keydown.enter="deactivate" @blur="deactivate" @keyup="$emit('input', value)">
+    </label>
   </div>
 </template>
 
@@ -10,7 +12,7 @@ import {v4 as uuidv4} from 'uuid';
 
 export default {
   name: 'text-edit',
-  props: [ 'object', 'property', 'type' ],
+  props: [ 'value' ],
   data(){
     return {
       active: false,
@@ -18,7 +20,10 @@ export default {
     }
   },
   methods: {
-    unactive(){
+    activate(){
+      this.active = true;
+    },
+    deactivate(){
       this.active = false;
     }
   }
@@ -36,9 +41,20 @@ input
   text-align: center;
 }
 
-label
+.editable
 {
   cursor: text;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  height:100%;
+}
+
+div
+{
+  width:100%;
+  height:100%;
 }
 
 </style>

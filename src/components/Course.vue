@@ -1,8 +1,8 @@
 <template>  
   <div class="course">
-    <text-edit class="name" v-bind:object="course" v-bind:property="'name'"></text-edit>
-    <number-edit class="credits" v-bind:object="course" v-bind:property="'credits'"></number-edit>
-    <number-edit class="grade" v-bind:object="course" v-bind:property="'grade'"></number-edit>
+    <text-edit class="name" v-model="course.name"></text-edit>
+    <number-edit class="credits" v-model="course.credits"></number-edit>
+    <number-edit class="grade" v-model="course.grade"></number-edit>
     <div class="remove">
       <button @click="$emit('delete-course')">Quitar</button>
     </div>
@@ -43,12 +43,6 @@ export default {
 {
   border-left:none;
 }
-
-/* /deep/ input
-{
-  width:100%;
-  height:100%;
-}*/
 
 .name
 {
