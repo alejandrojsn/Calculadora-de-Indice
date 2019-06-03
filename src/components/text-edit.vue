@@ -1,8 +1,8 @@
 <template>
   <div>
-    <label class="editable" @click="activate" v-bind:for="id">
+    <label class="editable" @click="activate" :for="id">
       <span v-show="!active">{{ value }}</span>
-      <input v-bind:id="id" v-show="active" type="text" v-model="value" @keydown.enter="deactivate" @blur="deactivate" @keyup="$emit('input', value)">
+      <input :id="id" v-show="active" type="text" v-model="value" @keydown.enter="deactivate" @blur="deactivate" @keyup="$emit('input', value)">
     </label>
   </div>
 </template>
