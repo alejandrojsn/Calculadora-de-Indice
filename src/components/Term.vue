@@ -2,10 +2,10 @@
 <div class="term">
   <button class="remove" @click="$emit('delete-term')">X</button>
   <text-edit class="term-name" v-model="term.name"></text-edit>
-  <div class="courses">
+  <div class="courses" ref="courses">
     <course v-for="(course, index) in term.courses" v-bind:key="index" v-bind:course="course" v-on:delete-course="$emit('delete-course', term.courses, course)"></course>
   </div>
-  <div class="add" @click="$emit('add-course')">
+  <div class="add" @click="addCourse(); scrollDown()">
     +
   </div>
 </div>
@@ -19,6 +19,17 @@ export default {
   name: 'term',
   props: [ 'term' ],
   components: { course, textEdit },
+  methods: {
+    addCourse() {
+      this.term.courses.push({ name: `Asignatura ${this.term.courses.length+1}`, credits: 0, grade: 0 });
+    },
+    scrollDown () {
+      setTimeout(() => {
+        let elem = this.$refs.courses;
+        elem.scrollTop = elem.scrollHeight;
+      }, 100);
+    }
+  }
 }
 </script>
 

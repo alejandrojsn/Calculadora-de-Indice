@@ -75,10 +75,6 @@ export default {
       removeFrom.splice(removeFrom.indexOf(element), 1);
     },
 
-    addCourse(term) {
-      term.courses.push({ name: `Asignatura ${term.courses.length+1}`, credits: 0, grade: 0 });
-    },
-
     termFactory(name) {
       return { name, courses: [] };
     },
