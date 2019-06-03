@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    Indice: {{ indice }}
+    <header>
+      Indice: {{ indice }}
+    </header>
     <div class="terms">
       <term v-for="(term, index) in terms" :key="index" :term="term" @delete-term="remove(terms, term)" :remove="remove"></term>
     </div>
@@ -57,6 +59,17 @@ export default {
   position:relative;
 }
 
+header
+{
+  align-items: center;
+  background-color: #191919; 
+  display:flex;
+  color:#fff;
+  font-size: 36px;
+  height: 10vh;
+  padding:0 10px;
+}
+
 .terms
 {
   display: grid;
@@ -76,10 +89,11 @@ export default {
   cursor:pointer;
   font-size:36px;
   height:50px;
-  position:absolute;
+  position:fixed;
   right:20px;
   width:50px;
   outline:none;
+  z-index: 98;
 }
 
 .new-term:active
