@@ -2,12 +2,9 @@
   <div id="app">
     Indice: {{ indice }}
     <div class="terms">
-      <term v-for="(term, index) in terms" :key="index" :term="term" @delete-course="remove(term.courses, $event)" :remove="remove"></term>
+      <term v-for="(term, index) in terms" :key="index" :term="term" @delete-term="remove(terms, term)" :remove="remove"></term>
     </div>
-    <div>
-      <input type="text" v-model="newTermInput">
-      <button @click="terms.push(termFactory(newTermInput)); newTermInput = ''">Añadir</button>
-    </div>
+    <button class="new-term" @click="addTerm">+</button>
   </div>
 </template>
 
@@ -21,51 +18,7 @@ export default {
 
   data() {
     return {
-      terms: [
-        {
-          name: 'term 1',
-          courses: [
-            { name: 'Mate I', credits: 4, grade: 5 },
-            { name: 'Lenguaje I', credits: 3, grade: 5}
-          ]
-        },
-        {
-          name: 'term 2',
-          courses: [
-            { name: 'Mate II', credits: 4, grade: 5 },
-            { name: 'Lenguaje II', credits: 3, grade: 4}
-          ]
-        },
-        {
-          name: 'term 2',
-          courses: [
-            { name: 'Mate II', credits: 4, grade: 5 },
-            { name: 'Lenguaje II', credits: 3, grade: 4}
-          ]
-        },
-        {
-          name: 'term 2',
-          courses: [
-            { name: 'Mate II', credits: 4, grade: 5 },
-            { name: 'Lenguaje II', credits: 3, grade: 4}
-          ]
-        },
-        {
-          name: 'term 2',
-          courses: [
-            { name: 'Mate II', credits: 4, grade: 5 },
-            { name: 'Lenguaje II', credits: 3, grade: 4}
-          ]
-        },
-        {
-          name: 'term 2',
-          courses: [
-            { name: 'Mate II', credits: 4, grade: 5 },
-            { name: 'Lenguaje II', credits: 3, grade: 4}
-          ]
-        }
-      ],
-      newTermInput: ""
+      terms: []
     }
   },
 
@@ -75,8 +28,8 @@ export default {
       removeFrom.splice(removeFrom.indexOf(element), 1);
     },
 
-    termFactory(name) {
-      return { name, courses: [] };
+    addTerm() {
+      this.terms.push({ name: `Trimestre ${this.terms.length+1}`, courses: [] });
     }
   },
 
@@ -88,12 +41,21 @@ export default {
       return credits === 0 ? 0 : total/credits;
     }
 
+  },
+
+  created() {
+    this.addTerm();
   }
 
 };
 </script>
 
 <style scoped>
+
+.app
+{
+  position:relative;
+}
 
 .terms
 {
@@ -103,6 +65,28 @@ export default {
   height: auto;
   width:100%;
   border-top:1px solid black;
+}
+
+.new-term
+{
+  border:none;
+  border-radius: 50%;
+  bottom:20px;
+  box-shadow: 5px 5px 0px rgba(0, 0, 0, .5);
+  cursor:pointer;
+  font-size:36px;
+  height:50px;
+  position:absolute;
+  right:20px;
+  width:50px;
+  outline:none;
+}
+
+.new-term:active
+{
+  bottom:18px;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, .5);
+  right:18px;
 }
 
 </style>
