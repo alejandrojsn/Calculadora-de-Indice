@@ -4,7 +4,7 @@
     <b>{{ term.name }} <button @click="$emit('delete-term')">Quitar</button></b>
   </div>
   <div class="courses">
-    <course v-for="course in term.courses" v-bind:course="course" v-on:delete-course="$emit('delete-course', term.courses, course)"></course>
+    <course v-for="(course, index) in term.courses" v-bind:key="index" v-bind:course="course" v-on:delete-course="$emit('delete-course', term.courses, course)"></course>
   </div>
   <div>
     <div>

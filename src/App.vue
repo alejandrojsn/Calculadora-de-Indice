@@ -2,7 +2,7 @@
   <div id="app">
     Indice: {{ indice }}
     <div class="terms">
-      <term v-for="term in terms" v-bind:term="term" @delete-course="removeCourse" @delete-term="remove(terms, term)" @add-course="addCourse(term)"></term>
+      <term v-for="(term, index) in terms" v-bind:key="index" v-bind:term="term" @delete-course="removeCourse" @delete-term="remove(terms, term)" @add-course="addCourse(term)"></term>
     </div>
     <div>
       <input type="text" v-model="newTermInput">

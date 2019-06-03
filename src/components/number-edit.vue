@@ -20,7 +20,6 @@ export default {
   methods: {
     preventZero(){
       this.object[this.property] = this.object[this.property] === '' ? 0 : this.object[this.property];
-      console.log(this.object[this.property])
     },
     unactive(){
       this.active = false;
