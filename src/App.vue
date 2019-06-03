@@ -2,7 +2,7 @@
   <div id="app">
     Indice: {{ indice }}
     <div class="terms">
-      <term v-for="(term, index) in terms" v-bind:key="index" v-bind:term="term" @delete-course="removeCourse" @delete-term="remove(terms, term)" @add-course="addCourse(term)"></term>
+      <term v-for="(term, index) in terms" v-bind:key="index" v-bind:term="term" @delete-course="remove(term.courses, $event)" :remove="remove"></term>
     </div>
     <div>
       <input type="text" v-model="newTermInput">
@@ -77,10 +77,6 @@ export default {
 
     termFactory(name) {
       return { name, courses: [] };
-    },
-
-    removeCourse(term, course) {
-      this.remove(term, course);
     }
   },
 
@@ -105,7 +101,7 @@ export default {
   grid-template-columns: repeat(5, 1fr);
   grid-auto-rows: 45vh;
   height: auto;
-  width:100vw;
+  width:100%;
   border-top:1px solid black;
 }
 

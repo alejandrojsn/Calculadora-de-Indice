@@ -51,6 +51,7 @@ input
   display:flex;
   height:100%;
   justify-content: center;
+  overflow: hidden;
   width:100%;
 }
 

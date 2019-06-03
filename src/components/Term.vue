@@ -3,7 +3,7 @@
   <button class="remove" @click="$emit('delete-term')">X</button>
   <text-edit class="term-name" v-model="term.name"></text-edit>
   <div class="courses" ref="courses">
-    <course v-for="(course, index) in term.courses" v-bind:key="index" v-bind:course="course" v-on:delete-course="$emit('delete-course', term.courses, course)"></course>
+    <course v-for="(course, index) in term.courses" v-bind:key="index" v-bind:course="course" v-on:delete-course="remove(term.courses, course)"></course>
   </div>
   <div class="add" @click="addCourse(); scrollDown()">
     +
@@ -17,7 +17,7 @@ import textEdit from '@/components/text-edit.vue'
 
 export default {
   name: 'term',
-  props: [ 'term' ],
+  props: [ 'term', 'remove' ],
   components: { course, textEdit },
   methods: {
     addCourse() {
