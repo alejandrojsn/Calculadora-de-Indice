@@ -48,16 +48,6 @@ export default {
   position:relative;
 }
 
-.term:nth-child(5n)
-{
-  border-right:none;
-}
-
-.term:first-child
-{
-  border-left:none;
-}
-
 .term-name
 {
   background-color:#f1f1f1;
@@ -104,5 +94,49 @@ export default {
 {
   font-size:32px;
   background-color:#ffffff;
+}
+
+@media screen and (min-width:1200px)
+{
+  .term:nth-child(5n)
+  {
+    border-right:none;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px)
+{
+  .term:nth-child(4n)
+  {
+    border-right:none;
+  }
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px)
+{
+  .term:nth-child(3n)
+  {
+    border-right:none;
+  }
+
+}
+
+@media screen and (min-width: 576px) and (max-width: 767px)
+{
+  .term:nth-child(2n)
+  {
+    border-right:none;
+  }
+
+}
+
+@media screen and (max-width: 575px)
+{
+  .term:nth-child(n)
+  {
+    border-right:none;
+  }
+
 }
 </style>

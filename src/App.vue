@@ -112,4 +112,36 @@ header
   right:18px;
 }
 
+@media screen and (max-width: 1199px)
+{
+  .terms
+  {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (max-width: 991px)
+{
+  .terms
+  {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 767px)
+{
+  .terms
+  {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 575px)
+{
+  .terms
+  {
+    grid-template-columns: 1fr;
+  }
+}
+
 </style>
